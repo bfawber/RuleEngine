@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGPRuleEngine", "AGPRuleEngine\AGPRuleEngine.csproj", "{20CBCF30-9916-4F86-A95A-6A5C3C0BF16F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGPRuleEngine.Model", "AGPRuleEngine.Model\AGPRuleEngine.Model.csproj", "{7DAE7A1C-AB46-407C-B22A-41DA7A5824F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGPBinaryExpressionTree", "AGPTree\AGPBinaryExpressionTree.csproj", "{38A45E2F-DECC-4F63-A8EA-0850A025C6D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGPBinaryExpressionTree.Test", "AGPBinaryExpressionTree.Test\AGPBinaryExpressionTree.Test.csproj", "{555DC96C-8EAD-4C1A-8D2E-8660DF203F2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20CBCF30-9916-4F86-A95A-6A5C3C0BF16F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20CBCF30-9916-4F86-A95A-6A5C3C0BF16F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20CBCF30-9916-4F86-A95A-6A5C3C0BF16F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20CBCF30-9916-4F86-A95A-6A5C3C0BF16F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DAE7A1C-AB46-407C-B22A-41DA7A5824F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DAE7A1C-AB46-407C-B22A-41DA7A5824F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DAE7A1C-AB46-407C-B22A-41DA7A5824F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DAE7A1C-AB46-407C-B22A-41DA7A5824F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38A45E2F-DECC-4F63-A8EA-0850A025C6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38A45E2F-DECC-4F63-A8EA-0850A025C6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38A45E2F-DECC-4F63-A8EA-0850A025C6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38A45E2F-DECC-4F63-A8EA-0850A025C6D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{555DC96C-8EAD-4C1A-8D2E-8660DF203F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{555DC96C-8EAD-4C1A-8D2E-8660DF203F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{555DC96C-8EAD-4C1A-8D2E-8660DF203F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{555DC96C-8EAD-4C1A-8D2E-8660DF203F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

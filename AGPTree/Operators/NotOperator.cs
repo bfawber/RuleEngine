@@ -1,6 +1,8 @@
-﻿namespace AGPBinaryExpressionTree.Operators
+﻿using AGPBinaryExpressionTree.Exceptions;
+
+namespace AGPBinaryExpressionTree.Operators
 {
-	public class OrOperator : Operator
+	public class NotOperator : Operator
 	{
 		/// <summary>
 		/// Performs an operation on the results from the left and right child nodes
@@ -10,7 +12,12 @@
 		/// <returns>the result of applying the operator to the left and right child nodes</returns>
 		public override bool Operate(Node left, Node right)
 		{
-			return left.Evaluate() || right.Evaluate();
+			if(right != null)
+			{
+				throw new InvalidUseOfOperatorException(typeof(NotOperator));
+			}
+
+			return !left.Evaluate();
 		}
 	}
 }

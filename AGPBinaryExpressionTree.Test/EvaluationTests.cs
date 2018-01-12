@@ -1,12 +1,10 @@
-using System;
 using Xunit;
-using AGPBinaryExpressionTree;
 using AGPBinaryExpressionTree.Operators;
 using System.Collections.Generic;
 
 namespace AGPBinaryExpressionTree.Test
 {
-    public class EvaluationTests
+	public class EvaluationTests
     {
         [Fact]
         public void CanCreateLeafNode()
@@ -164,6 +162,30 @@ namespace AGPBinaryExpressionTree.Test
 			Assert.Equal(lastOr.Evaluate(), expectedAnswersMap[$"{a}{b}{c}{d}"]);
 		}
 
+		/// <summary>
+		/// !(A * B)
+		/// </summary>
+		[Theory]
+		[InlineData(0, 0)]
+		[InlineData(1, 0)]
+		[InlineData(0, 1)]
+		[InlineData(1, 1)]
+		public void CanEvaluateSimpleNandGate(int a, int b)
+		{
+			Dictionary<string, bool> expectedAnswersMap = new Dictionary<string, bool>
+			{
+				{"00", true },
+				{"10", true },
+				{"01", true },
+				{"11", false }
+			};
+			LeafNode<int> left = new LeafNode<int>(a, SimpleValueExpressionFunction);
+			LeafNode<int> right = new LeafNode<int>(b, SimpleValueExpressionFunction);
+			OperatorNode opNode = new OperatorNode(left, right, new AndOperator());
+			OperatorNode notOp = new OperatorNode(opNode, null, new NotOperator());
+
+			Assert.Equal(notOp.Evaluate(), expectedAnswersMap[$"{a}{b}"]);
+		}
 
 
 		public bool SimpleValueExpressionFunction(int x)

@@ -1,4 +1,6 @@
 ﻿using AGPBinaryExpressionTree.Exceptions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AGPBinaryExpressionTree.Operators
 {
@@ -10,14 +12,14 @@ namespace AGPBinaryExpressionTree.Operators
 		/// <param name="left">the left childe node</param>
 		/// <param name="right">the right child node</param>
 		/// <returns>the result of applying the operator to the left and right child nodes</returns>
-		public override bool Operate(Node left, Node right)
+		public override bool Operate(List<Node> children)
 		{
-			if(right != null)
+			if(children.Count != 1)
 			{
 				throw new InvalidUseOfOperatorException(typeof(NotOperator));
 			}
 
-			return !left.Evaluate();
+			return !children.First().Evaluate();
 		}
 	}
 }

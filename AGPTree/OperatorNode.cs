@@ -1,4 +1,5 @@
 ﻿using AGPBinaryExpressionTree.Operators;
+using System.Collections.Generic;
 
 namespace AGPBinaryExpressionTree
 {
@@ -15,7 +16,7 @@ namespace AGPBinaryExpressionTree
 		/// <param name="left">The left child node</param>
 		/// <param name="right">The right childe node</param>
 		/// <param name="oprtr">The operator this node represents</param>
-		public OperatorNode(Node left, Node right, Operator oprtr) : base(left, right)
+		public OperatorNode(List<Node> children, Operator oprtr) : base(children)
 		{
 			_operator = oprtr;
 		}
@@ -26,7 +27,7 @@ namespace AGPBinaryExpressionTree
 		/// <returns>the result of the boolean expression (true or false) to this point in the tree</returns>
 		public override bool Evaluate()
 		{
-			return _operator.Operate(_left, _right);
+			return _operator.Operate(_children);
 		}
 	}
 }

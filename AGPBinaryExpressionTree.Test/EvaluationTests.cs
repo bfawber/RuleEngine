@@ -28,7 +28,7 @@ namespace AGPBinaryExpressionTree.Test
 		public void CanCreateOperatorNode()
 		{
 			Operator op = new AndOperator();
-			OperatorNode opNode = new OperatorNode(null, null, op);
+			OperatorNode opNode = new OperatorNode(null, op);
 		}
 
 		/// <summary>
@@ -37,22 +37,35 @@ namespace AGPBinaryExpressionTree.Test
 		[Fact]
 		public void CanPerformSimpleAndTree()
 		{
-			LeafNode<int> left = new LeafNode<int>(0, SimpleValueExpressionFunction);
-			LeafNode<int> right = new LeafNode<int>(0, SimpleValueExpressionFunction);
+			List<Node> children = new List<Node>
+			{
+				new LeafNode<int>(0, SimpleValueExpressionFunction),
+				new LeafNode<int>(0, SimpleValueExpressionFunction)
+			};
+
 			Operator op = new AndOperator();
-			OperatorNode opNode00 = new OperatorNode(left, right, op);
+			OperatorNode opNode00 = new OperatorNode(children, op);
 
-			left = new LeafNode<int>(0, SimpleValueExpressionFunction);
-			right = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			OperatorNode opNode01 = new OperatorNode(left, right, op);
+			children = new List<Node>
+			{
+				new LeafNode<int>(0, SimpleValueExpressionFunction),
+				new LeafNode<int>(1, SimpleValueExpressionFunction)
+			};
+			OperatorNode opNode01 = new OperatorNode(children, op);
 
-			left = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			right = new LeafNode<int>(0, SimpleValueExpressionFunction);
-			OperatorNode opNode10 = new OperatorNode(left, right, op);
+			children = new List<Node>
+			{
+				new LeafNode<int>(1, SimpleValueExpressionFunction),
+				new LeafNode<int>(0, SimpleValueExpressionFunction)
+			};
+			OperatorNode opNode10 = new OperatorNode(children, op);
 
-			left = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			right = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			OperatorNode opNode11 = new OperatorNode(left, right, op);
+			children = new List<Node>
+			{
+				new LeafNode<int>(1, SimpleValueExpressionFunction),
+				new LeafNode<int>(1, SimpleValueExpressionFunction)
+			};
+			OperatorNode opNode11 = new OperatorNode(children, op);
 
 			Assert.False(opNode00.Evaluate());
 			Assert.False(opNode01.Evaluate());
@@ -66,22 +79,35 @@ namespace AGPBinaryExpressionTree.Test
 		[Fact]
 		public void CanPerformSimpleOrTree()
 		{
-			LeafNode<int> left = new LeafNode<int>(0, SimpleValueExpressionFunction);
-			LeafNode<int> right = new LeafNode<int>(0, SimpleValueExpressionFunction);
+			List<Node> children = new List<Node>
+			{
+				new LeafNode<int>(0, SimpleValueExpressionFunction),
+				new LeafNode<int>(0, SimpleValueExpressionFunction)
+			};
+
 			Operator op = new OrOperator();
-			OperatorNode opNode00 = new OperatorNode(left, right, op);
+			OperatorNode opNode00 = new OperatorNode(children, op);
 
-			left = new LeafNode<int>(0, SimpleValueExpressionFunction);
-			right = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			OperatorNode opNode01 = new OperatorNode(left, right, op);
+			children = new List<Node>
+			{
+				new LeafNode<int>(0, SimpleValueExpressionFunction),
+				new LeafNode<int>(1, SimpleValueExpressionFunction)
+			};
+			OperatorNode opNode01 = new OperatorNode(children, op);
 
-			left = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			right = new LeafNode<int>(0, SimpleValueExpressionFunction);
-			OperatorNode opNode10 = new OperatorNode(left, right, op);
+			children = new List<Node>
+			{
+				new LeafNode<int>(1, SimpleValueExpressionFunction),
+				new LeafNode<int>(0, SimpleValueExpressionFunction)
+			};
+			OperatorNode opNode10 = new OperatorNode(children, op);
 
-			left = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			right = new LeafNode<int>(1, SimpleValueExpressionFunction);
-			OperatorNode opNode11 = new OperatorNode(left, right, op);
+			children = new List<Node>
+			{
+				new LeafNode<int>(1, SimpleValueExpressionFunction),
+				new LeafNode<int>(1, SimpleValueExpressionFunction)
+			};
+			OperatorNode opNode11 = new OperatorNode(children, op);
 
 			Assert.False(opNode00.Evaluate());
 			Assert.True(opNode01.Evaluate());
@@ -152,12 +178,25 @@ namespace AGPBinaryExpressionTree.Test
 			LeafNode<int> B = new LeafNode<int>(b, SimpleValueExpressionFunction);
 			LeafNode<int> C = new LeafNode<int>(c, SimpleValueExpressionFunction);
 			LeafNode<int> D = new LeafNode<int>(d, SimpleValueExpressionFunction);
+			List<Node> firstOrChildren = new List<Node>
+			{
+				A,
+				B
+			};
+			List<Node> middleAndChildren = new List<Node>();
+			List<Node> lastOrChildren = new List<Node>();
 			Operator andOp = new AndOperator();
 			Operator orOp = new OrOperator();
 
-			OperatorNode firstOr = new OperatorNode(A, B, orOp);
-			OperatorNode middleAnd = new OperatorNode(firstOr, C, andOp);
-			OperatorNode lastOr = new OperatorNode(middleAnd, D, orOp);
+			OperatorNode firstOr = new OperatorNode(firstOrChildren, orOp);
+
+			middleAndChildren.Add(firstOr);
+			middleAndChildren.Add(C);
+			OperatorNode middleAnd = new OperatorNode(middleAndChildren, andOp);
+
+			lastOrChildren.Add(middleAnd);
+			lastOrChildren.Add(D);
+			OperatorNode lastOr = new OperatorNode(lastOrChildren, orOp);
 
 			Assert.Equal(lastOr.Evaluate(), expectedAnswersMap[$"{a}{b}{c}{d}"]);
 		}
@@ -179,10 +218,19 @@ namespace AGPBinaryExpressionTree.Test
 				{"01", true },
 				{"11", false }
 			};
-			LeafNode<int> left = new LeafNode<int>(a, SimpleValueExpressionFunction);
-			LeafNode<int> right = new LeafNode<int>(b, SimpleValueExpressionFunction);
-			OperatorNode opNode = new OperatorNode(left, right, new AndOperator());
-			OperatorNode notOp = new OperatorNode(opNode, null, new NotOperator());
+			List<Node> andChildren = new List<Node>
+			{
+				new LeafNode<int>(a, SimpleValueExpressionFunction),
+				new LeafNode<int>(b, SimpleValueExpressionFunction)
+			};
+
+			OperatorNode opNode = new OperatorNode(andChildren, new AndOperator());
+
+			List<Node> notChild = new List<Node>
+			{
+				opNode
+			};
+			OperatorNode notOp = new OperatorNode(notChild, new NotOperator());
 
 			Assert.Equal(notOp.Evaluate(), expectedAnswersMap[$"{a}{b}"]);
 		}

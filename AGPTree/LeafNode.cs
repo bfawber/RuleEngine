@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AGPBinaryExpressionTree.Exceptions;
+using System;
 
 namespace AGPBinaryExpressionTree
 {
@@ -16,7 +17,7 @@ namespace AGPBinaryExpressionTree
 		/// </summary>
 		/// <param name="value">The value stored by the node</param>
 		/// <param name="evaluateValue">The function that turns the value stored into a true or false value</param>
-		public LeafNode(T value, Func<T, bool> evaluateValue) : base(null, null)
+		public LeafNode(T value, Func<T, bool> evaluateValue) : base(null)
 		{
 			this._value = value;
 			this._evaluateValue = evaluateValue;
@@ -29,6 +30,11 @@ namespace AGPBinaryExpressionTree
 		public override bool Evaluate()
 		{
 			return _evaluateValue(_value);
+		}
+
+		public override void AddChild(Node child)
+		{
+			throw new InvalidNodeOperationException(nameof(AddChild));
 		}
 	}
 }

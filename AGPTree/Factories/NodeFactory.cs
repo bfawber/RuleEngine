@@ -1,5 +1,6 @@
 ﻿using AGPBinaryExpressionTree.Operators;
 using System;
+using System.Collections.Generic;
 
 namespace AGPBinaryExpressionTree.Factories
 {
@@ -28,9 +29,9 @@ namespace AGPBinaryExpressionTree.Factories
 		/// <param name="left">the left child of the operator node</param>
 		/// <param name="right">the right child of the operator node</param>
 		/// <returns>A new operator node based on the given parameters</returns>
-		public static Node CreateNode(Operator oprtr, Node left, Node right)
+		public static Node CreateNode(Operator oprtr, List<Node> children)
 		{
-			return new OperatorNode(left, right, oprtr);
+			return new OperatorNode(children, oprtr);
 		}
     }
 }

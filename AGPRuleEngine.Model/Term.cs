@@ -17,6 +17,6 @@ namespace AGPRuleEngine.Model
 		/// <summary>
 		/// The things involved in the Term's 'Action'
 		/// </summary>
-		public List<string> Arguments { get; set; }
+		public List<TermArgument> Arguments { get; set; }
     }
 }
